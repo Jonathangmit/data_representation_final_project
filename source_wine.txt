@@ -1,0 +1,32 @@
+show databases;
+use datarepresentation;
+show tables;
+create table larder (
+vin int NOT NULL,
+chateau varchar(250),
+notes varchar(250),
+price int,
+PRIMARY KEY(vin));
+show tables;
+desc larder;
+insert into larder (vin, chateau,notes,price) values (1,'Salthill',
+'Overpriced wine often mistakes itself for a taylors hill reserve it isnt anthing of the sort.',25 );
+select * from larder;
+insert into larder (vin, chateau,notes,price) values (2,'Renmore',
+'Sloping gently down to the well fertizised shore of Ballylougne these wines really capture the essence of of Galway',15 );
+select * from larder;
+insert into larder (vin, chateau,notes,price) values (3,'Knocknarra',
+'You could split this into 4 or 5 parcels of land but it would still be Knocknarra ',8  );
+insert into larder (vin, chateau,notes,price) values (4,'Ballybane',
+'The lantern tasting house is a must if you visit this place, in disrepair and closed for years its really come on a destination', 7 );
+insert into larder (vin, chateau,notes,price) values (5,'Newcastle',
+'Named after the dreary, freezing cold, hope bereft former industrial northen English city. Hard to fault the logic', 12 );
+insert into larder (vin, chateau,notes,price) values (6,'Mervue',
+'Old Vines only make better wine if they were good vines in the first place ', 12);
+insert into larder (vin, chateau,notes,price) values (7,'Galway city',
+'Grown in the Shadow of the scrap material piled in the harbour and tickled by gentle diesel fumed zephers whats not to like about this classic blend? ', 50 );
+insert into larder (vin, chateau,notes,price) values (8,'Taylors Hill',
+'Sounds like it could be wine, if it was, it would drink itself ', 100 );
+insert into larder (vin, chateau,notes,price) values (9,'Belmont',
+'Nested perfectly between Flannerys hotel and GMIT, this playfull wine gets its character from the children who throw stones at cars on Dublin road. Most people dont know where it is. Its better that way. Cooking wine, no tolet cleaner actually.', 3 );
+select * from larder;

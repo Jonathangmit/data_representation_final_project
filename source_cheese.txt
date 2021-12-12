@@ -1,0 +1,24 @@
+show databases;
+use datarepresentation;
+show tables;
+create table pantry (
+fromage int NOT NULL,
+farm varchar(250),
+notes varchar(250),
+price int,
+PRIMARY KEY(fromage));
+show tables;
+desc pantry;
+insert into pantry (fromage, farm,notes,price) values (1,'Ballybrit',
+'stinks of ripe unwashed sportskit, unpleasant aftertaste', 12 );
+insert into pantry (fromage, farm,notes,price) values (2,'Barna',
+'Not from round here are you? get of my cheese', 20 );
+insert into pantry (fromage, farm,notes,price) values (3,'Wellpark',
+'Lacks anything of taste, students eat it bacause they think its different', 7 );
+insert into pantry (fromage, farm,notes,price) values (4,'Belmont',
+'Dysentry is linked as a potential side effect, this is one of its better aspects', 1 );
+insert into pantry (fromage, farm,notes,price) values (5,'Roscam',
+'Much like its place of creation, nothing much to it', 2 );
+insert into pantry (fromage, farm,notes,price) values (6,'Westside',
+'There is a farm shop on the side of the road, best not to actually stop the car though', 9 );
+select * from pantry;
