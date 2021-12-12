@@ -1,0 +1,57 @@
+<html>
+<!-- A small set of web pages based around the idea of an intergalactic wine merchant who has a special on Earth wines-->
+<!-- Set up of front page style  a simple box with typre writer style text-->
+	<style>
+	#g{width:600px;border:2px solid black; color: black; padding: 5px; margin : 10px; font-family: 'Courier New', monospace; font-size: 25px;}
+	</style>
+<head>
+<!-- import d3-->
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<title>Log in page</title>
+</head>
+
+<body style ="background-color : yellow;">
+
+
+<div id="myDiv"></div>
+<p> <h1 style="color:red"> FIBBONACHI CHEESE AND WINES STAFF PORTAL</h1></p>
+<p id ="g"> Enter user name and password</p>
+<form>
+	</p>
+	<p>Username:
+		<input type="text"id="uname" name="name" required/>	
+	</p>
+	<p>Password:
+		<input type="password"id="pword" name="pword" required/>
+	</p>
+</form>
+<!-- after entering detials user can continue into the site by pressing the image of the wine bottle, I was unable to tie the submit and check in with the site entry-->
+<a href="projectindex.html">
+<img src="enter2.jpg"width="330"height="130">
+<a href="projectindex2.html">
+<img src="cheeseenter.png"width="330"height="130">
+</a>
+</body>
+<script>
+
+// This should (I hope ) be a fibbonacci sequence accending and decending
+var myArray =[1,1,2,3,5,8,13,21,34,55,89,55,34,21,13,8,5,3,2,1,1];
+// setting the size of the svg containier
+let svgContainer = d3.select("#myDiv").append("svg")
+	.attr("width",5000)
+	.attr("height",201);
+	
+// calling all "rect" elements and assotiating the array 'my array ' with it	
+let  myRectangle = svgContainer.selectAll("rect")
+	.data(myArray);
+
+// drawing the rectangle to the screen and defining the attributes through method chaining
+myRectangle.enter()
+	.append("rect")
+		.attr("x",function(d, i){return 50+(i*60);})
+		.attr("y",10)
+		.attr("width",function(d){return d;})
+		.attr("height",200)
+		.attr("fill","blue");
+</script>
+</html>

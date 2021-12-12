@@ -1,0 +1,254 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    </head>
+    <body>
+        <body style ="background-color : yellow;"></body>
+        <div id ="create-update" style = "display:none" class="container" >
+            <img align="left" src="logo.png"width="600" height ="100">
+                <p><h1 align = "left">Fibonacci Cheese</h1></p>
+                <h1 style="font-family:Apple Chancery;"align = "left"><i>the galway cellar</i></h1>
+
+            <h2>Create-edit (office staff only)</h2>
+            <h3>Please ensure that entrys are correct before updating data in the table</h3>
+            <table id="createUpdateForm" class="table table-bordered">
+                <tr>
+                    <td>fromage</td>
+                    <td><input type="text" name="fromage" id = "idInput"></td>
+                </tr>
+                <tr>
+                    <td>farm</td>
+                    <td><input type="text" name="farm"></td>
+                </tr>
+                <tr>
+                    <td>notes</td>
+                    <td><input type="text" name="notes" style = width:1200></td>
+        
+                </tr>
+                <tr>
+                    <td>price</td>
+                    <td><input type="currency" name="price"></td>
+                </tr>
+                    <td></td><td>
+                        <button id="create-button" onclick ="doCreate()">Create</button></td>
+                        <button id="update-button" onclick ="doUpdate()">Update</button></td>
+                </tr>
+            </table>
+            <h1>Cheese selling technique's</h1>
+            <h3>THREE STEPS TO A SALE </h3>
+            <img src="partridge.jpg"width="200"height="130">
+            <img src="partridge.PNG"width="200"height="130">
+            <img src="partridge3.PNG"width="200"height="130">
+            <h6><i>1. Would you like some cheese? 2. go on try it 3. you've touched it now, thats a sale</i></h6>
+            <h3>ONCE THE SALE IS AGREED</h3>
+            <h5>When selling cheese, ensure that the customer does not taste the cheese. This likely to put them off buying
+                often people who smell cheese can recoil in horror as they smell it. Quickly follow this reflex up
+                with a comment such as <b>"you know your cheese's, a beauty isnt it"</b>. If they ask for 100 grams say 
+                <b>"so that's about a quater pound is it?"</b> Instincivly they will say yes, you should then weigh out 120 grams 
+                and say <b>"just over ok?"</b> They will without fail say "Thats perfect thanks". <b>This is infact a 20% uplift on their origional asking weight!</b>
+            </h5>
+            
+
+
+        </div>
+        <div id="display" class="container">
+            <img align="left" src="logo.png"width="600" height ="100">
+                <p><h1 align = "left">Fibonacci Cheese</h1></p>
+                <h1 style="font-family:Apple Chancery;"align = "left"><i>the galway cellar</i></h1>
+                <h3style="font-family:Courier, monospace;"><p>Please use this database carefully, any incorrect entry will result
+                    in instant dismissal with a fine of 3 months wages. This even includes if the manager made you enter the wrong data.<b>You are 
+                    responsible.</b></p>
+                </h3>
+                <button onclick ="showCreate()">Create</button>
+                <table id ="bookTable" class ="table table-striped">
+                    <tr>
+                        <th>fromage</th><th>farm</th><th>notes</th><th>price</th><th></th><th></th>
+                    </tr>
+                
+                </table>
+                <h6><p><b>Staff instructions for using the database:</b></p></h6>
+                <h6<p>1. select the required operation, for create and update this will take you to the
+                    data entry page.</p>
+                    <p>2. Enter the changed or new details, note a new VIN entry will require the user to obtain a VIN number assigned by the manager(A.B).</p>
+                    <p>3. Click the update/ create button</p>
+                    <p>4. Delete will instantly remove the item from the table</p></h6>
+                <h6><p><b>Pray you got it right</b></p></h6>
+
+        </div>
+        <script>
+            function showCreate(){
+                document.getElementById('display').style.display = "none"
+                document.getElementById('update-button').style.display = "none"
+                document.getElementById('create-update').style.display = "block"
+                document.getElementById('create-update').style.display = "block"
+            }
+            function showUpdate(thisElem){
+                var rowElement =thisElem.parentNode.parentNode;
+                fromage = rowElement.getAttribute("id");
+                book = readcheeseFromRow(rowElement)
+                populateForm(book)
+
+                document.getElementById('display').style.display = "none"
+                document.getElementById('update-button').style.display ="block"
+                document.getElementById('create-update').style.display = "none"
+                document.getElementById('create-update').style.display = "block"
+
+            }
+            function readcheeseFromRow(rowElement){
+                book={}
+                book.fromage = rowElement.getAttribute("id");
+                book.farm = rowElement.cells[1].firstChild.textContent
+                book.notes = rowElement.cells[2].firstChild.textContent
+                book.price = rowElement.cells[3].firstChild.textContent
+
+                return book
+            }
+            function populateForm(book){
+                var form = document.getElementById('createUpdateForm')
+
+                form.querySelector('input[name="fromage"]').value = book.fromage
+                form.querySelector('input[name="fromage"]').disabled=true
+
+                form.querySelector('input[name="farm"]').value = book.farm
+                form.querySelector('input[name="notes"]').value = book.notes
+                form.querySelector('input[name="price"]').value = book.price
+            }
+            function clearForm(){
+                var form = document.getElementById('createUpdateForm')
+
+                form.querySelector('input[name="fromage"]').value = ""
+                form.querySelector('input[name="fromage"]').disabled=false
+
+                form.querySelector('input[name="farm"]').value = ""
+                form.querySelector('input[name="notes"]').value = ""
+                form.querySelector('input[name="price"]').value = ""
+            }
+            function doCreate(){
+                console.log("in doCreate")
+                book = getcheeseFromForm()
+                $.ajax ({
+                    url:"/food",
+                    data:JSON.stringify(book),
+                    method:"POST",
+                    dataType:"JSON",
+                    contentType:"application/json; charset=utf-8",
+                    success:function(result){
+                        console.log(result)
+                        addcheeseToTable(book)
+                        showDisplay()
+                        clearForm()
+                    },
+                    error:function(xhr,status,error){
+                        console.log("error"+ error)
+                    }
+                })
+            
+            }
+            function doUpdate(){
+                book = getcheeseFromForm()
+                updateServer(book)
+                updateTableRow(book)
+                showDisplay()
+            }
+            function updateServer(book){
+                $.ajax({
+                    url:"/food/"+book.fromage,
+                    data:JSON.stringify(book),
+                    method:"PUT",
+                    dataType:"JSON",
+                    contentType: "application/JSON; charset=utf-8",
+                    success: function(result){
+                    console.log(result)
+                    updateTableRow(book)
+                    showDisplay()
+                    clearForm()
+                    },
+                    error: function(xhr,status,error){
+                        console.log("error"+ error)
+                    }
+                })
+
+            }
+            function doDelete(thisElem){
+                var tableElement = document.getElementById('bookTable');
+                var rowElement = thisElem.parentNode.parentNode;
+                var index = rowElement.rowIndex;
+                fromage= rowElement.getAttribute("id");
+                $.ajax({
+                    url:"/food/"+fromage,
+                    method:"DELETE",
+                    dataType:"JSON",
+                    succes: function(result){
+                        tableElement.deleteRow(index);
+                    },
+                    error:function(xhr,status,error){
+                        console.log(error)
+                    }
+                })
+                tableElement.deleteRow(index);
+            }
+            function updateTableRow(book){
+                rowElement = document.getElementById(book.fromage)
+                rowElement.cells[1].firstChild.textContent = book.chateau
+                rowElement.cells[2].firstChild.textContent = book.notes
+                rowElement.cells[3].firstChild.textContent = book.price
+            }
+            function getcheeseFromForm(){
+                var form = document.getElementById('createUpdateForm')
+                var book={}
+                book.fromage= form.querySelector('input[name="fromage"]').value
+                book.farm= form.querySelector('input[name="farm"]').value
+                book.notes= form.querySelector('input[name="notes"]').value
+                book.price= form.querySelector('input[name="price"]').value
+                console.log(book)
+                return book
+
+            }
+            function showDisplay(){
+                document.getElementById('display').style.display = "block"
+                document.getElementById('create-update').style.display = "none"
+            }
+
+
+            function populateTable(){
+                //ajax getAll
+                $.ajax({
+                    url:'http://127.0.0.1:5000/food',
+                    method:'GET',
+                    dataType:'JSON',
+                    success:function(results){
+                        for (book of results){
+                            addcheeseToTable(book)
+                        }
+                    },
+                    error:function(xhr,status,error){
+                        console.log("error "+error +" code:"+status)
+                    }
+                    
+                })
+                //addWineToTable(book)
+            }
+            function addcheeseToTable(book){
+                //console.log("working so far")
+                tableElem = document.getElementById("bookTable")
+                rowElem = tableElem.insertRow(-1)
+                rowElem.setAttribute("id",book.fromage)
+                cell1=rowElem.insertCell(0)
+                cell1.innerHTML = book.fromage
+                cell2=rowElem.insertCell(1)
+                cell2.innerHTML = book.farm
+                cell3=rowElem.insertCell(2)
+                cell3.innerHTML = book.notes
+                cell4=rowElem.insertCell(3)
+                cell4.innerHTML = book.price
+                cell5=rowElem.insertCell(4)
+                cell5.innerHTML = '<button onclick="showUpdate(this)">Update</button>'
+                cell6=rowElem.insertCell(5)
+                cell6.innerHTML = '<button onclick="doDelete(this)">Delete</button>'
+
+            }
+            populateTable()
+        </script>
+    </body>
+</html>
