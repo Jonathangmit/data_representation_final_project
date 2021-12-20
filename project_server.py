@@ -55,7 +55,7 @@ def delete(VIN):
     projectDAO.delete(VIN)
     return jsonify({"done":True})
 
-###### new zone
+###### new zone for the cheese using the same functions but giving them a different name.
 
 @app.route('/food')
 def getAll2():
